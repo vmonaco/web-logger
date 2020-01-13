@@ -68,12 +68,7 @@ function Biologger(params, userid, sesskey, enrollURL, flushDelay) {
 
 (function () {
     var b = new Biologger();
-    // b.startLogging();
-
-    for (var i = 0; i < 10000; i++) {
-      b.addEvent([Date.now(), performance.now()]);
-    }
-
+    b.startLogging();
 
     var textFile = null;
     var save = document.getElementById('save');
