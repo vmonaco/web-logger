@@ -68,7 +68,12 @@ function Biologger(params, userid, sesskey, enrollURL, flushDelay) {
 
 (function () {
     var b = new Biologger();
-    b.startLogging();
+    // b.startLogging();
+
+    for (var i = 0; i < 10000; i++) {
+      b.addEvent([Date.now(), performance.now()]);
+    }
+
 
     var textFile = null;
     var save = document.getElementById('save');
@@ -93,8 +98,8 @@ function Biologger(params, userid, sesskey, enrollURL, flushDelay) {
       var y = [];
 
       for(var i = 1; i < b.buffer.length; i++) {
-        x.push(b.buffer[i][1]);
-        y.push(b.buffer[i][0] - b.buffer[i][1]);
+        x.push(b.buffer[i][1] - b.buffer[1][1]);
+        y.push((b.buffer[i][0]-b.buffer[1][0]) - (b.buffer[i][1] - b.buffer[1][1]));
       }
 
       var trace1 = {
