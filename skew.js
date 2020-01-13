@@ -87,4 +87,25 @@ function Biologger(params, userid, sesskey, enrollURL, flushDelay) {
   		});
 
     }, false);
+
+    document.getElementById('plot').addEventListener('click', function () {
+      var x = [];
+      var y = [];
+
+      for(var i = 1; i < b.buffer.length; i++) {
+        x.push(b.buffer[i][1]);
+        y.push(b.buffer[i][0] - b.buffer[i][1]);
+      }
+
+      var trace1 = {
+        x: x,
+        y: y,
+        mode: 'markers',
+        type: 'scatter'
+      };
+      var data = [trace1];
+
+      Plotly.newPlot('scatter', data);
+    }, false);
+
 })();
