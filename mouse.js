@@ -108,15 +108,23 @@ function Biologger(params, userid, sesskey, enrollURL, flushDelay) {
     };
 
     this.events = {
-        keypress: that.keypress,
-        keydown: that.keydown,
-        keyup : that.keyup,
-        mousedown : that.mousedown,
-        mouseup : that.mouseup,
+        // keypress: that.keypress,
+        // keydown: that.keydown,
+        // keyup : that.keyup,
+        // mousedown : that.mousedown,
+        // mouseup : that.mouseup,
         mousemove : that.mousemove,
-        wheel : that.wheel,
+        // wheel : that.wheel,
     };
 };
+
+var i = 1;
+function reset_plots() {
+  i = 1;
+  Plotly.newPlot('plot_time_div', [{y: [], mode:'lines'}]);
+  Plotly.newPlot('plot_date_div', [{y: [], mode:'lines'}]);
+  Plotly.newPlot('plot_perf_div', [{y: [], mode:'lines'}]);
+}
 
 (function () {
     var b = new Biologger();
@@ -146,35 +154,36 @@ function Biologger(params, userid, sesskey, enrollURL, flushDelay) {
 
     }, false);
 
-    var slider = document.getElementById("frequency");
-    var output = document.getElementById("demo");
-    output.innerHTML = slider.value; // Display the default slider value
-
-    // Update the current slider value (each time you drag the slider handle)
-    slider.oninput = function() {
-      output.innerHTML = this.value;
-    }
+    reset_plots()
 
     document.getElementById('plot').addEventListener('click', function () {
-      var slider = document.getElementById("frequency");
+      reset_plots()
+    }, false);
+
+    var interval = setInterval(function() {
+      var time_freq = document.getElementById("time_freq").value;
+      var date_freq = document.getElementById("date_freq").value;
+      var perf_freq = document.getElementById("perf_freq").value;
 
       var x = [];
-      var y = [];
+      var y_time = [];
+      var y_date = [];
+      var y_perf = [];
 
-      for(var i = 1; i < b.buffer.length; i++) {
-        // x.push(b.buffer[i][1]);
+      for(; i < b.buffer.length; i++) {
+        // x.push(b.buffer[i][3]);
         x.push(i);
-        y.push(b.buffer[i][1] % (1000/slider.value));
+        y_time.push(b.buffer[i][1] % (1000/time_freq));
+        y_date.push(b.buffer[i][2] % (1000/date_freq));
+        y_perf.push(b.buffer[i][3] % (1000/perf_freq));
       }
 
-      var trace1 = {
-        x: x,
-        y: y,
-        mode: 'lines',
-        type: 'lines'
-      };
-      var data = [trace1];
+      if (y_time.length > 0) {
+        Plotly.extendTraces('plot_time_div', {y: [y_time]}, [0]);
+        Plotly.extendTraces('plot_date_div', {y: [y_date]}, [0]);
+        Plotly.extendTraces('plot_perf_div', {y: [y_perf]}, [0]);
+      }
+    }, 1000);
 
-      Plotly.newPlot('plotdiv', data);
-    }, false);
+
 })();
