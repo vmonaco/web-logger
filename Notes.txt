@@ -1,0 +1,17 @@
+
+
+New DB stuff
+
+From folder in terminal:
+
+*Be sure you are in the right condo environment... KeyLogger for me!
+
+
+$ python
+>>> from app import db
+>>> db.create_all
+
+
+https://github.com/PrettyPrinted/building_user_login_system/blob/master/finish/app.py
+
+https://pusher.com/tutorials/chatbot-flask-dialogflow
