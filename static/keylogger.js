@@ -145,7 +145,7 @@ function csv_string(values) {
     return finalVal;
 }
 
-function Keylogger(flushDelay, enrollURL) {
+function Keylogger(enrollURL, flushDelay) {
     console.log("Keylogger init");
 
     var that = this; // Used in several closures below

@@ -63,7 +63,6 @@ def append_events(id, event_type, events):
 
 
 def save_meta(id, task, session, timenow, useragent):
-    os.makedirs(DATA_DIR, exist_ok=True)
     fname = os.path.join(DATA_DIR, METADATA_FNAME + '.csv')
 
     if os.path.exists(fname):
@@ -97,16 +96,25 @@ def enroll():
     return 'Enrolled %d event(s)' % n
 
 
+@app.route("/metadata", methods=['POST'])
+def metadata():
+    # Get the user ID
+    id = request.args.get('id')
+
+    num_enrolled = 0
+    for event_type in request.form.keys():
+        n = append_metadata(id, metedata_type, request.form[meteadata_type])
+        num_enrolled += n
+
+    return 'Enrolled %d metadata' % n
+
+
 @app.route("/tmp",  methods=['GET','POST'])
 def index():
     timenow = datetime.utcnow()
-    fname = timenow.strftime('login_' + session + '_%Y-%m-%d-%H-%M-%S')
-    save_meta(fname, 'login', session, timenow, request.headers.get('User-Agent').replace('"','""'))
-
+    fname = timenow.strftime('%Y%m%d%H%M%S.%f')
     enroll_url = url_for('enroll', id=fname)
-
-    resp = make_response(render_template('index.html', enroll_url=enroll_url, flush_delay=FLUSH_DELAY,
-                         action=url_for('index', session=session)))
+    resp = make_response(render_template('index.html', enroll_url=enroll_url, flush_delay=FLUSH_DELAY))
     return resp
 
 
@@ -116,4 +124,5 @@ def hello():
 
 
 if __name__ == "__main__":
+    os.makedirs(DATA_DIR, exist_ok=True)
     app.run(host='0.0.0.0')

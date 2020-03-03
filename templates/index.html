@@ -23,7 +23,7 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
-    var b = new Keylogger("{{ flush_delay }}", "{{ enroll_url|safe }}");
+    var b = new Keylogger("{{ enroll_url|safe }}", "{{ flush_delay }}");
     b.startLogging();
     $(window).on("beforeunload", function () {
         b.stopLogging();
