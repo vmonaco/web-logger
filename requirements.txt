@@ -1,6 +1,2 @@
-dialogflow
 Flask
-Flask-Login
-Flask-SQLAlchemy
-Flask-WTF
 uWSGI

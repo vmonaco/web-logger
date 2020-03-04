@@ -6,29 +6,15 @@
   <title>Weblogger</title>
 </head>
 
-<body class="page page-id-18 page-template-default group-blog" id="body">
+<body id="body">
 
-<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='jquery.mousewheel.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='keylogger.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='weblogger.js') }}"></script>
 <script type="text/javascript">
-$(document).ready(function () {
-    //Disable full page
-    $('body').bind('cut copy paste', function (e) {
-        e.preventDefault();
-    });
-
-    //Disable part of page
-    $('#id').bind('cut copy paste', function (e) {
-        e.preventDefault();
-    });
-
-    var b = new Keylogger("{{ enroll_url|safe }}", "{{ flush_delay }}");
+(function () {
+    var b = new Weblogger("{{ events_url|safe }}", "{{ flush_delay }}");
     b.startLogging();
-    $(window).on("beforeunload", function () {
-        b.stopLogging();
-    });
-});
+    ;
+})();
 </script>
 
 {% block extra %}{% endblock %}
