@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 from flask import Flask, render_template, request, url_for, redirect, jsonify, make_response
 
-DATA_DIR = '~/weblogger-data'
+DATA_DIR = '/tmp/weblogger-data'
 
 EVENT_HEADERS = {
     'events':'event,time,date_time,performance_time,x,y,z',
