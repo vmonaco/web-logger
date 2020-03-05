@@ -6,29 +6,29 @@ from datetime import datetime
 from flask import Flask, render_template, request, url_for, redirect, jsonify, make_response
 
 DATA_DIR = os.path.join(os.path.expanduser('~'), 'Dropbox', 'weblogger-data')
+BACKUP_DIR = '/tmp/weblogger-data'
 
 EVENT_HEADERS = {
     'events':'event,time,date_time,performance_time,x,y,z',
     'metadata':'field,value',
 }
 
-for event_type in EVENT_HEADERS.keys():
-    os.makedirs(os.path.join(DATA_DIR, event_type), exist_ok=True)
-
 # How often to flush logged events
 FLUSH_DELAY = 2000
 
 app = Flask(__name__)
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
-def append_events(id, event_type, request):
+def append_events(id, event_type, request, basedir=DATA_DIR):
     events = request.get_data(as_text=True)
 
     if len(events) == 0:
         return 0
 
-    fname = os.path.join(DATA_DIR, event_type, id + '.csv')
+    outdir = os.path.join(basedir, event_type)
+    fname = os.path.join(outdir, id + '.csv')
+
+    os.makedirs(outdir, exist_ok=True)
 
     if os.path.exists(fname):
         with open(fname, 'a') as f:
@@ -63,7 +63,8 @@ def events():
     type = request.args.get('type')
     n = 0
     if type in EVENT_HEADERS.keys():
-        n += append_events(id, type, request)
+        n += append_events(id, type, request, outdir=DATA_DIR)
+        n += append_events(id, type, request, outdir=BACKUP_DIR)
     return 'Saved %d event(s)' % n
 
 
