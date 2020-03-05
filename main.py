@@ -63,8 +63,8 @@ def events():
     type = request.args.get('type')
     n = 0
     if type in EVENT_HEADERS.keys():
-        n += append_events(id, type, request, outdir=DATA_DIR)
-        n += append_events(id, type, request, outdir=BACKUP_DIR)
+        n += append_events(id, type, request, basedir=DATA_DIR)
+        n += append_events(id, type, request, basedir=BACKUP_DIR)
     return 'Saved %d event(s)' % n
 
 
