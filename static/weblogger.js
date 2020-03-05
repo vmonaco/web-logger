@@ -143,10 +143,12 @@ function Weblogger(eventsURL, flushDelay) {
                 return;
             }
             navigator.sendBeacon(that.eventsURL, that.gatherEvents());
+            that.emptyBuffer();
         }, this.flushDelay);
 
         hook(window, 'unload', function () {
             navigator.sendBeacon(that.eventsURL, that.gatherEvents());
+            that.emptyBuffer();
         });
 
         navigator.sendBeacon(that.metadataURL, that.gatherMetadata());
