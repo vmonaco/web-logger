@@ -8,25 +8,31 @@
 
 <body id="body">
 
-<script type="text/javascript" src="{{ url_for('static', filename='weblogger.js') }}"></script>
-<script type="text/javascript">
-(function () {
-    var b = new Weblogger("{{ events_url|safe }}", "{{ flush_delay }}");
-    b.startLogging();
-    ;
-})();
-</script>
-
-{% block extra %}{% endblock %}
+Label this capture: <input id="label" type="text"><button id="submit">Submit</button> <div id="saved" style="display: none;">Saved</div>
+<br>
+<br>
+<textarea rows=20 cols=80></textarea>
 
 <noscript>
     <style type="text/css">
         .container {display:none;}
     </style>
     <div class="noscriptmsg">
-        JavaScript must be enabled. Please enable JavaScript to continue.
+        JavaScript must be enabled. Please enable JavaScript and reload this page.
     </div>
 </noscript>
 
 </body>
+<script type="text/javascript" src="{{ url_for('static', filename='weblogger.js') }}"></script>
+<script type="text/javascript">
+var w = new Weblogger("{{ events_url|safe }}", "{{ flush_delay }}")
+w.startLogging();
+document.getElementById("submit").onclick = function() {
+    var label = document.getElementById("label").value;
+    if (label.length > 0) {
+        navigator.sendBeacon(w.metadataURL, makeCSV(["label",label]));
+        document.getElementById("saved").style.display = "inline-block";
+    }
+};
+</script>
 </html>

@@ -107,7 +107,7 @@ function Weblogger(eventsURL, flushDelay) {
     this.emptyBuffer = function () {
         that.buffer = [];
     };
-    
+
     this.gatherEvents = function(e) {
         return that.buffer.join('\n');
     };
@@ -116,6 +116,14 @@ function Weblogger(eventsURL, flushDelay) {
         return [
           ['user_agent',navigator.userAgent],
           ['app_version',navigator.appVersion],
+          ['locale',navigator.language],
+          ['timezone',(new Date()).getTimezoneOffset()],
+          ['screen_height',window.screen.height],
+          ['screen_width',window.screen.width],
+          ['screen_avail_height',window.screen.availHeight],
+          ['screen_avail_width',window.screen.availWidth],
+          ['screen_color_depth',window.screen.colorDepth],
+
         ].map(makeCSV).join('\n');
     };
 

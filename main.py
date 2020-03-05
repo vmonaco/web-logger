@@ -22,7 +22,12 @@ app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 
-def append_events(id, event_type, events):
+def append_events(id, event_type, request):
+    events = request.get_data(as_text=True)
+
+    if len(events) == 0:
+        return 0
+
     fname = os.path.join(DATA_DIR, event_type, id + '.csv')
 
     if os.path.exists(fname):
@@ -33,6 +38,10 @@ def append_events(id, event_type, events):
 
         with open(fname, 'w') as f:
             f.write(EVENT_HEADERS[event_type] + '\n')
+
+            if event_type=='metadata':
+                events += '\nip,%s\nport,%s' %(request.environ['REMOTE_ADDR'], request.environ.get('REMOTE_PORT'))
+
             f.write(events)
 
     num_events = events.count('\n') + 1
@@ -54,7 +63,7 @@ def events():
     type = request.args.get('type')
     n = 0
     if type in EVENT_HEADERS.keys():
-        n += append_events(id, type, request.get_data(as_text=True))
+        n += append_events(id, type, request)
     return 'Saved %d event(s)' % n
 
 
