@@ -22,7 +22,6 @@ Label this capture: <input id="label" type="text"><button id="submit">Submit</bu
     </div>
 </noscript>
 
-</body>
 <script type="text/javascript" src="{{ url_for('static', filename='weblogger.js') }}"></script>
 <script type="text/javascript">
 var w = new Weblogger("{{ events_url|safe }}", "{{ flush_delay }}")
@@ -35,4 +34,5 @@ document.getElementById("submit").onclick = function() {
     }
 };
 </script>
+</body>
 </html>
