@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Survey Start{% endblock title %}
+
+{% block content %}
+<form method="POST" action="{{ url_for('survey.survey', slug=slug) }}" id="consent_form" autocomplete="off">
+  <input id="sessionID" name="sessionID" type="hidden" value="{{ session_id }}">
+  <input id="questionID" name="questionID" type="hidden" value="start">
+  <button type="submit" class="btn btn-primary btn-block btn-large" id="submit">Begin</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,14 @@
+<noscript>
+    <style type="text/css">
+        .container {display:none;}
+    </style>
+    <div class="noscriptmsg">
+        JavaScript must be enabled. Please enable JavaScript and reload this page.
+    </div>
+</noscript>
+
+<script type="text/javascript" src="{{ url_for('static', filename='logger.js') }}"></script>
+<script type="text/javascript">
+var w = new Weblogger("{{ url_for('enroll', id=session_id, _external=True)|safe }}", "{{ config['FLUSH_DELAY'] }}")
+w.startLogging();
+</script>

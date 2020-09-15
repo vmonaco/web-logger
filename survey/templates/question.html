@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Survey{% endblock title %}
+
+{% block content %}
+Question
+
+<form method="POST" action="{{ url_for('survey.survey', slug=slug) }}" id="question" autocomplete="off">
+  <input id="sessionID" name="sessionID" type="hidden" value="{{ session_id }}">
+  <button type="submit" class="btn btn-primary btn-block btn-large" id="submit"">Submit</button>
+</form>
+
+{% endblock content %}

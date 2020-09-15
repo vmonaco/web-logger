@@ -5,28 +5,26 @@ import json
 from datetime import datetime
 from flask import Flask, render_template, request, url_for, redirect, jsonify, make_response
 
-DATA_DIR = os.path.join(os.path.expanduser('~'), 'Dropbox', 'weblogger-data')
-BACKUP_DIR = '/tmp/weblogger-data'
 
-EVENT_HEADERS = {
-    'events':'event,time,date_time,performance_time,x,y,z',
-    'metadata':'field,value',
-}
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object('config')
 
-# How often to flush logged events
-FLUSH_DELAY = 2000
+    import survey
+    survey.init_app(app, url_prefix='/survey')
 
-app = Flask(__name__)
+    return app
 
+app = create_app()
 
-def append_events(id, event_type, request, basedir=DATA_DIR):
+def append_events(id, event_type, request, basedir=app.config['DATA_DIR']):
     events = request.get_data(as_text=True)
 
     if len(events) == 0:
         return 0
 
-    outdir = os.path.join(basedir, event_type)
-    fname = os.path.join(outdir, id + '.csv')
+    outdir = os.path.join(basedir, id)
+    fname = os.path.join(outdir, event_type + '.csv')
 
     os.makedirs(outdir, exist_ok=True)
 
@@ -37,7 +35,7 @@ def append_events(id, event_type, request, basedir=DATA_DIR):
         print('Created file:', fname)
 
         with open(fname, 'w') as f:
-            f.write(EVENT_HEADERS[event_type] + '\n')
+            f.write(app.config['EVENT_HEADERS'][event_type] + '\n')
 
             if event_type=='metadata':
                 events += '\nip,%s\nport,%s' %(request.environ['REMOTE_ADDR'], request.environ.get('REMOTE_PORT'))
@@ -50,32 +48,34 @@ def append_events(id, event_type, request, basedir=DATA_DIR):
 
 @app.after_request
 def add_header(r):
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    r.headers['Pragma'] = 'no-cache'
+    r.headers['Expires'] = '0'
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
 
 
-@app.route("/events", methods=['POST'])
-def events():
+@app.route('/enroll', methods=['POST'])
+def enroll():
     id = request.args.get('id')
     type = request.args.get('type')
     n = 0
-    if type in EVENT_HEADERS.keys():
-        n += append_events(id, type, request, basedir=DATA_DIR)
-        n += append_events(id, type, request, basedir=BACKUP_DIR)
+    if type in app.config['EVENT_HEADERS'].keys():
+        n += append_events(id, type, request, basedir=app.config['DATA_DIR'])
+        append_events(id, type, request, basedir=app.config['BACKUP_DIR'])
+
     return 'Saved %d event(s)' % n
 
 
-@app.route("/")
+@app.route('/')
 def index():
+    # generate a unique session id
     id = datetime.utcnow().strftime('%Y%m%d%H%M%S.%f')
-    events_url = url_for('events', id=id, _external=True)
-    print(events_url)
-    resp = make_response(render_template('index.html', events_url=events_url, flush_delay=FLUSH_DELAY))
+    # enroll_url = url_for('enroll', id=id, _external=True)
+    # print(enroll_url)
+    resp = make_response(render_template('index.html', session_id=id))
     return resp
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0')

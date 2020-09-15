@@ -1,31 +1,14 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weblogger</title>
-</head>
+{% block title %}Home{% endblock title %}
 
-<body id="body">
-
-Label this capture: <input id="label" type="text"><button id="submit">Submit</button> <div id="saved" style="display: none;">Saved</div>
+{% block content %}
+Label this capture: <input id="label" type="text"><button id="submit">Submit</button><div id="saved" style="display: none;">Saved</div>
 <br>
 <br>
 <textarea rows=20 cols=80></textarea>
 
-<noscript>
-    <style type="text/css">
-        .container {display:none;}
-    </style>
-    <div class="noscriptmsg">
-        JavaScript must be enabled. Please enable JavaScript and reload this page.
-    </div>
-</noscript>
-
-<script type="text/javascript" src="{{ url_for('static', filename='weblogger.js') }}"></script>
 <script type="text/javascript">
-var w = new Weblogger("{{ events_url|safe }}", "{{ flush_delay }}")
-w.startLogging();
 document.getElementById("submit").onclick = function() {
     var label = document.getElementById("label").value;
     if (label.length > 0) {
@@ -34,5 +17,4 @@ document.getElementById("submit").onclick = function() {
     }
 };
 </script>
-</body>
-</html>
+{% endblock content %}
