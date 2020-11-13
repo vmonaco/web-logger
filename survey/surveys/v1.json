@@ -1,0 +1,42 @@
+{
+    "title": "Demographic Questionnaire",
+    "questions": [
+        {
+            "type": "string",
+            "label": "Please type the name of a close friend or relative",
+            "required": true
+        },
+        {
+            "type": "radio",
+            "label": "Do you support the U.S. Government?",
+            "required": true,
+            "options": [
+                "Yes",
+                "No"
+            ]
+        },
+        {
+            "type": "radio",
+            "label": "What is your highest degree achieved?",
+            "required": true,
+            "options": [
+                "High school",
+                "Undergraduate",
+                "Graduate",
+                "Doctoral",
+                "Other"
+            ]
+        },
+        {
+            "type": "radio",
+            "label": "How many alcoholic drinks per week do you consume?",
+            "required": true,
+            "options": [
+                "None",
+                "1",
+                "2",
+                "More than 2"
+            ]
+        }
+    ]
+}

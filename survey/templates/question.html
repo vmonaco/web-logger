@@ -7,7 +7,46 @@ Question
 
 <form method="POST" action="{{ url_for('survey.survey', slug=slug) }}" id="question" autocomplete="off">
   <input id="sessionID" name="sessionID" type="hidden" value="{{ session_id }}">
+
+    <div class="question">
+      <label for="{{ qid }}">
+        <span class="question-title">{{ q.label }}</span>
+
+        {% if q.error %}
+          <span class="error">
+            {{ survey_data.messages.error.required }}
+          </span>
+        {% endif %}
+      </label>
+      <p>
+        {% if q.help %}
+          {{ q.help }}
+        {% endif %}
+      </p>
+      <div>
+        {% if q.type == "text" %}
+          <textarea id="{{ qid }}" name={{ qid }}>{{ q.value }}</textarea>
+        {% elif q.type in ("radio", "checkbox") %}
+          <ul class="options">
+            {% for opt in q.options %}
+              <li>
+                {% set checked = "checked" if opt == q.value or opt in q.get('values', []) else "" %}
+                <label>
+                  <input name="{{ qid }}" type="{{ q.type }}" value="{{ opt }}" {{ checked }}>
+                  <span>{{ opt }}</span>
+                </label>
+                {% if opt == q.other_option %}
+                  <input type="text" name="{{ qid }}.{{ opt }}.other" value={{ q.other_value }}>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+
   <button type="submit" class="btn btn-primary btn-block btn-large" id="submit"">Submit</button>
 </form>
+
 
 {% endblock content %}

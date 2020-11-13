@@ -150,9 +150,7 @@ def survey(slug):
     # user consented to survey, start or continue the session
     session_data = start_or_load_session(slug, session)
 
-    # survey started by clicking begin. set the sessionID cookie when first question loads
-    if request.method == 'POST' and request.form.get('questionID') == 'start':
-        resp.set_cookie('sessionID', session)
+    next_question = session_data['next_question']
 
     # survey response submitted
     if request.method == 'POST':
@@ -162,7 +160,6 @@ def survey(slug):
 
         # update the session
         session_data['next_question'] += 1
-
         save_session(session_data)
 
     # TODO: Make sure the current session matches what was saved.
@@ -178,4 +175,6 @@ def survey(slug):
         return resp
 
     # render the next question
-    return render_template('question.html', session_id=session, slug=slug, survey_data=survey_data, session_data=session_data)
+    resp = make_response(render_template('question.html', session_id=session, slug=slug, survey_data=survey_data, session_data=session_data, q=survey_data['questions'][next_question]))
+    resp.set_cookie('sessionID', session)
+    return resp
