@@ -24,8 +24,16 @@ Label this capture: <input id="label" type="text"><button id="submit">Submit</bu
 
 <script type="text/javascript" src="{{ url_for('static', filename='weblogger.js') }}"></script>
 <script type="text/javascript">
+
 var w = new Weblogger("{{ events_url|safe }}", "{{ flush_delay }}")
 w.startLogging();
+
+const urlParams = new URLSearchParams(window.location.search);
+entries = urlParams.entries();
+for(const entry of entries) {
+    navigator.sendBeacon(w.metadataURL, makeCSV([entry[0], entry[1]]));
+}
+
 document.getElementById("submit").onclick = function() {
     var label = document.getElementById("label").value;
     if (label.length > 0) {
