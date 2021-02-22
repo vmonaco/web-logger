@@ -200,31 +200,31 @@ function Weblogger(enrollURL, flushDelay) {
     };
 
     this.keypress = function(e) {
-        that.addEvent(['keypress', e.timeStamp, Date.now(), performance.now(), e.location, e.repeat, e.keyCode]);
+        that.addEvent(['keypress', e.timeStamp, Date.now(), performance.now(), e.location, e.repeat, e.keyCode, e.target.id]);
     };
 
     this.keydown = function(e) {
-        that.addEvent(['keydown', e.timeStamp, Date.now(), performance.now(), e.location, e.repeat, e.keyCode]);
+        that.addEvent(['keydown', e.timeStamp, Date.now(), performance.now(), e.location, e.repeat, e.keyCode, e.target.id]);
     };
 
     this.keyup = function(e) {
-        that.addEvent(['keyup', e.timeStamp, Date.now(), performance.now(), e.location, e.repeat, e.keyCode]);
+        that.addEvent(['keyup', e.timeStamp, Date.now(), performance.now(), e.location, e.repeat, e.keyCode, e.target.id]);
     };
 
     this.mousedown = function(e) {
-        that.addEvent(['mousedown', e.timeStamp, Date.now(), performance.now(), e.screenX, e.screenY, e.button]);
+        that.addEvent(['mousedown', e.timeStamp, Date.now(), performance.now(), e.screenX, e.screenY, e.button, e.target.id]);
     };
 
     this.mouseup = function(e) {
-        that.addEvent(['mouseup', e.timeStamp, Date.now(), performance.now(), e.screenX, e.screenY, e.button]);
+        that.addEvent(['mouseup', e.timeStamp, Date.now(), performance.now(), e.screenX, e.screenY, e.button, e.target.id]);
     };
 
     this.mousemove = function(e) {
-        that.addEvent(['mousemove', e.timeStamp, Date.now(), performance.now(), e.screenX, e.screenY, e.buttons]);
+        that.addEvent(['mousemove', e.timeStamp, Date.now(), performance.now(), e.screenX, e.screenY, e.buttons, e.target.id]);
     };
 
     this.wheel = function(e) {
-        that.addEvent(['mousewheel', e.timeStamp, Date.now(), performance.now(), e.deltaX, e.deltaY, e.deltaMode]);
+        that.addEvent(['mousewheel', e.timeStamp, Date.now(), performance.now(), e.deltaX, e.deltaY, e.deltaMode, e.target.id]);
     };
 
     this.events = {

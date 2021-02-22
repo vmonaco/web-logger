@@ -1,42 +1,267 @@
 {
-    "title": "Demographic Questionnaire",
+    "title": "Survey Questionnaire:",
     "questions": [
         {
-            "type": "string",
-            "label": "Please type the name of a close friend or relative",
+            "type": "text",
+            "label": "Please type the following in the text box below: I promise to answer the questions truthfully and to the best of the ability, without help from the internet. I understand the effects of lying on a questionnaire for research and the negative consequences that can have undermining a study.",
             "required": true
         },
         {
+            "type": "text",
+            "label": "What is your first name?",
+            "required": true
+        },
+        {
+            "type": "text",
+            "label": "What is your middle name?",
+            "required": true
+        },
+        {
+            "type": "text",
+            "label": "What elementary school did you attend?",
+            "required": true
+        },
+          {
             "type": "radio",
-            "label": "Do you support the U.S. Government?",
+            "label": "What gender do you identify with?",
             "required": true,
             "options": [
-                "Yes",
-                "No"
+                "Female",
+                "Male",
+                "Non-binary",
+                "I prefer to not answer this question"
             ]
         },
         {
             "type": "radio",
-            "label": "What is your highest degree achieved?",
+            "label": "What is the current year? (Example: 1997)",
             "required": true,
             "options": [
-                "High school",
-                "Undergraduate",
-                "Graduate",
-                "Doctoral",
-                "Other"
+                "2020",
+                "2021",
+                "2022",
+                "1999"
+            ]
+        },
+
+          {
+            "type": "text",
+            "label": "In what city/town were you born?",
+            "required": true
+        },
+          {
+            "type": "text",
+            "label": "What was the make of the first car you owned?",
+            "required": true
+        },
+           {
+            "type": "select",
+            "label": "What month were you born?",
+            "required": true,
+             "options": [
+               "January",
+               "February",
+               "March",
+               "April",
+               "May",
+               "June",
+               "July",
+               "August",
+               "September",
+               "October",
+               "November",
+               "December"
+             ]
+        },
+        {
+            "type": "select",
+            "label": "What is your horoscope sign?",
+            "required": true,
+            "options": [
+              "Aries",
+              "Taurus",
+              "Gemini",
+              "Cancer",
+              "Leo",
+              "Virgo",
+              "Libra",
+              "Scorpio",
+              "Sagittarius",
+              "Capricorn",
+              "Aquarius",
+              "Pisces",
+              "Unsure"
             ]
         },
         {
+            "type": "text",
+            "label": "What is your birth date? (Mon/Day/Year, example: 11/2/1997",
+            "required": true
+        },
+      {
+            "type": "text",
+            "label": "How old are you? (example: 21)",
+            "required": true
+        },
+       {
             "type": "radio",
-            "label": "How many alcoholic drinks per week do you consume?",
+            "label": "How many alcoholic drinks do you have weekly?",
+            "options": [
+              "I am sober",
+              "I don't drink",
+              "1-2",
+              "3-4",
+              "5-7",
+              "8+"
+            ]
+        },
+       {
+            "type": "checkbox",
+            "label": "Have you ever smoked marijuana?",
+            "options": [
+              "Yes",
+              "No"
+            ]
+        },
+      {
+            "type": "text",
+            "label": "What is the name of your first love?",
+            "required": true
+        },
+       {
+            "type": "text",
+            "label": "Who do you trust more than anyone in this world?",
+            "required": true
+        },
+      {
+            "type": "select",
+            "label": "For the remaining set of questions, please pick a significant other, parent, or close friend to impersonate. You should choose the person whom you know the most information about and therefore are most likely to be able to answer the questions truthfully and accurately. Please specify from which category below your new identity belongs and answer the questions to the best of your ability. Good luck!",
             "required": true,
             "options": [
-                "None",
-                "1",
-                "2",
-                "More than 2"
+              "Significant Other",
+              "Parent",
+              "Close Friend"
             ]
+        },
+        {
+            "type": "text",
+            "label": "What is your first name?",
+            "required": true
+        },
+        {
+            "type": "text",
+            "label": "What is your middle name?",
+            "required": true
+        },
+        {
+            "type": "text",
+            "label": "What elementary school did you attend?",
+            "required": true
+        },
+          {
+            "type": "radio",
+            "label": "What gender do you identify with?",
+            "required": true,
+            "options": [
+                "Female",
+                "Male",
+                "Non-binary",
+                "I prefer to not answer this question"
+            ]
+        },
+        {
+            "type": "text",
+            "label": "What country do you live in? (No abbreviations)",
+            "required": true
+        },
+          {
+            "type": "text",
+            "label": "In what city/town were you born?",
+            "required": true
+        },
+          {
+            "type": "text",
+            "label": "What was the make of the first car you owned?",
+            "required": true
+        },
+           {
+            "type": "select",
+            "label": "What month were you born?",
+            "required": true,
+             "options": [
+               "January",
+               "February",
+               "March",
+               "April",
+               "May",
+               "June",
+               "July",
+               "August",
+               "September",
+               "October",
+               "November",
+               "December"
+             ]
+        },
+        {
+            "type": "select",
+            "label": "What is your horoscope sign?",
+            "required": true,
+            "options": [
+              "Aries",
+              "Taurus",
+              "Gemini",
+              "Cancer",
+              "Leo",
+              "Virgo",
+              "Libra",
+              "Scorpio",
+              "Sagittarius",
+              "Capricorn",
+              "Aquarius",
+              "Pisces",
+              "Unsure"
+            ]
+        },
+        {
+            "type": "text",
+            "label": "What is your birth date? (Mon/Day/Year, example: 11/2/1997",
+            "required": true
+        },
+      {
+            "type": "text",
+            "label": "How old are you? (example: 21)",
+            "required": true
+        },
+       {
+            "type": "radio",
+            "label": "How many alcoholic drinks do you have weekly?",
+            "options": [
+              "I am sober",
+              "I don't drink",
+              "1-2",
+              "3-4",
+              "5-7",
+              "8+"
+            ]
+        },
+       {
+            "type": "checkbox",
+            "label": "Have you ever smoked marijuana?",
+            "options": [
+              "Yes",
+              "No"
+            ]
+        },
+      {
+            "type": "text",
+            "label": "What is the name of your first love?",
+            "required": true
+        },
+       {
+            "type": "text",
+            "label": "Who do you trust more than anyone in this world?",
+            "required": true
         }
     ]
 }
