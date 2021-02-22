@@ -3,8 +3,8 @@ import os
 DEBUG = True
 TEMPLATES_AUTO_RELOAD = True
 
-BACKUP_DIR = '/tmp/web-logger'
-# ROOT_DIR = os.path.join(os.path.expanduser('~'), 'Dropbox', 'web-logger')
+# BACKUP_DIR = '/tmp/web-logger'
+ROOT_DIR = os.path.join(os.path.expanduser('~'), 'Dropbox', 'web-logger')
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
 DATA_DIR = os.path.join(ROOT_DIR, 'data')
 
