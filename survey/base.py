@@ -175,6 +175,6 @@ def survey(slug):
         return resp
 
     # render the next question
-    resp = make_response(render_template('question.html', session_id=session, slug=slug, survey_data=survey_data, session_data=session_data, q=survey_data['questions'][next_question]))
+    resp = make_response(render_template('question.html', session_id=session, slug=slug, survey_data=survey_data, session_data=session_data, q=survey_data['questions'][next_question], question_id=next_question))
     resp.set_cookie('sessionID', session)
     return resp

@@ -11,12 +11,7 @@ DATA_DIR = os.path.join(ROOT_DIR, 'data')
 # Headers for data CSV files
 EVENT_HEADERS = {
     'metadata':'field,value',
-    'event':'event,time,date_time,performance_time',
-    'keystroke':'timepress,timerelease,keycode,keyname,target,selectionstartpress,selectionendpress,selectionstartrelease,selectionendrelease',
-    'mousemotion':'time,x,y,xpage,ypage,xtarget,ytarget,targetwidth,targetheight,dragged,target',
-    'mouseclick':'timepress,timerelease,button,xpress,ypress,xoffsetpress,yoffsetpress,targetwidthpress,targetheightpress,targetpress,selectionstartpress,selectionendpress,xrelease,yrelease,xoffsetrelease,yoffsetrelease,targetwidthrelease,targetheightrelease,targetrelease,selectionstartrelease,selectionendrelease',
-    'mousescroll':'time,xdelta,ydelta,deltamode,deltafactor,x,y,xpage,ypage,xtarget,ytarget,targetwidth,targetheight,target',
-    'response':'question,response',
+    'event':'event,question,time,date_time,performance_time,x,y,z',
 }
 
 # How often to flush logged events

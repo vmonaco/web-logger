@@ -6,6 +6,7 @@
   .content {
     width: 700px;
     margin: 20px auto;
+    height: 100%;
   }
   .content.wide {
     width: auto;

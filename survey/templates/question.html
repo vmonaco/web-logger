@@ -25,11 +25,11 @@ QUESTION
       </p>
       <div>
         {% if q.type == "text" %}
-          <textarea id="{{ qid }}" name={{ qid }}>{{ q.value }}</textarea>
+          <textarea id="textarea" name="textarea">{{ q.value }}</textarea>
         {% elif q.type == "select" %}
-          <select name = "question" id = "question">
+          <select name = "select" id = "select">
             {% for opt in q.options %}
-              <option value="opt">{{ opt }}</option>
+              <option value="opt" id="{{ opt }}">{{ opt }}</option>
           {% endfor %}
         </select>
         {% elif q.type in ("radio", "checkbox") %}
@@ -38,11 +38,11 @@ QUESTION
               <li>
                 {% set checked = "checked" if opt == q.value or opt in q.get('values', []) else "" %}
                 <label>
-                  <input name="question" type="{{ q.type }}" value="{{ opt }}" {{ checked }}>
+                  <input id="{{ opt }}" name="question" type="{{ q.type }}" value="{{ opt }}" {{ checked }}>
                   <span>{{ opt }}</span>
                 </label>
                 {% if opt == q.other_option %}
-                  <input type="text" name="question" value={{ q.other_value }}>
+                  <input type="text" name="question" value={{ q.other_value }} id="{{ q.other_value }}">
                 {% endif %}
               </li>
             {% endfor %}

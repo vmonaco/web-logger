@@ -9,6 +9,6 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='logger.js') }}"></script>
 <script type="text/javascript">
-var w = new Weblogger("{{ url_for('enroll', id=session_id, _external=True)|safe }}", "{{ config['FLUSH_DELAY'] }}")
+var w = new Weblogger("{{ url_for('enroll', id=session_id, _external=True)|safe }}", "{{ config['FLUSH_DELAY'] }}", "{{ question_id }}")
 w.startLogging();
 </script>
