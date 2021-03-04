@@ -3,7 +3,7 @@
     "questions": [
         {
             "type": "text",
-            "label": "Please type the following in the text box below: I promise to answer the questions truthfully and to the best of the ability, without help from the internet. I understand the effects of lying on a questionnaire for research and the negative consequences that can have undermining a study.",
+            "label": "Please type the following in the text box below: I promise to answer the questions truthfully and to the best of my ability, without help from the internet. I understand the effects of lying on a questionnaire for research and the negative consequences that can have, thus undermining a study.",
             "required": true
         },
         {
