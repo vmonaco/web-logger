@@ -3,7 +3,7 @@
 {% block title %}Survey{% endblock title %}
 
 {% block content %}
-QUESTION
+QUESTION {{ question_id + 1 }} out of {{ num_questions }}
 
 <form method="POST" action="{{ url_for('survey.survey', slug=slug) }}" id="question" autocomplete="off">
   <input id="sessionID" name="sessionID" type="hidden" value="{{ session_id }}">
@@ -18,40 +18,24 @@ QUESTION
           </span>
         {% endif %}
       </label>
-      <p>
-        {% if q.help %}
-          {{ q.help }}
-        {% endif %}
-      </p>
-      <div>
+      <div class="question-input">
         {% if q.type == "text" %}
           <textarea id="textarea" name="textarea">{{ q.value }}</textarea>
         {% elif q.type == "select" %}
-          <select name = "select" id = "select">
+          <select name = "select" id = "select" size="{{ q.options|length }}">
             {% for opt in q.options %}
               <option value="opt" id="{{ opt }}">{{ opt }}</option>
           {% endfor %}
         </select>
         {% elif q.type in ("radio", "checkbox") %}
-          <ul class="options">
             {% for opt in q.options %}
-              <li>
-                {% set checked = "checked" if opt == q.value or opt in q.get('values', []) else "" %}
-                <label>
-                  <input id="{{ opt }}" name="question" type="{{ q.type }}" value="{{ opt }}" {{ checked }}>
-                  <span>{{ opt }}</span>
-                </label>
-                {% if opt == q.other_option %}
-                  <input type="text" name="question" value={{ q.other_value }} id="{{ q.other_value }}">
-                {% endif %}
-              </li>
+                  <label id="{{ opt }}-label" class="radio-label"><input id="{{ opt }}-input" class="radio-input" name="question" type="{{ q.type }}" value="{{ opt }}"> {{ opt }}</label>
             {% endfor %}
-          </ul>
         {% endif %}
       </div>
     </div>
 
-  <button type="submit" class="btn btn-primary btn-block btn-large" id="submit"">Submit</button>
+  <button type="submit" class="form-submit-button" id="submit"">Submit</button>
 </form>
 
 

@@ -169,12 +169,12 @@ def survey(slug):
         return make_response(render_template('start.html', session_id=session, slug=correct_slug, survey_data=survey_data))
 
     # last question submitted, finish and clear the sessionID cookie
-    if session_data['next_question'] >= len(survey_data['questions']):
+    if session_data['next_question'] > len(survey_data['questions']):
         resp = make_response(render_template('finish.html', session_id=session, slug=slug))
         resp.set_cookie('sessionID', '', expires=0)
         return resp
 
     # render the next question
-    resp = make_response(render_template('question.html', session_id=session, slug=slug, survey_data=survey_data, session_data=session_data, q=survey_data['questions'][next_question], question_id=next_question))
+    resp = make_response(render_template('question.html', session_id=session, slug=slug, survey_data=survey_data, session_data=session_data, q=survey_data['questions'][next_question], question_id=next_question, num_questions=len(survey_data['questions'])))
     resp.set_cookie('sessionID', session)
     return resp

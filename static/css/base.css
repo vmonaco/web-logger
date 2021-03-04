@@ -1,17 +1,7 @@
 .content {
-    margin: 20px 2px;
-}
-
-@media screen and (min-width: 700px) {
-  .content {
-    width: 700px;
+    width: 800px;
     margin: 20px auto;
     height: 100%;
-  }
-  .content.wide {
-    width: auto;
-    margin: 20px 4px;
-  }
 }
 
 .question {
@@ -21,118 +11,53 @@
   font-size: medium
 }
 
+.question-input {
+  margin: 10px 0;
+  color: black;
+  font-family: verdana;
+  font-size: medium;
+  text-align: center;
+}
+
 .question-title {
   font-size: large;
-  margin: 60px 0;
   color: grey;
   font-family: verdana;
+  display: block;
+  margin: 50px auto;
 }
 
+select {
+  display: block;
+  margin: 0 auto;
+}
 
 textarea {
-  width: 100%;
+  width: 40em;
   height: 15em;
+  display: block;
+  margin: 0 auto;
 }
 
-@media screen and (min-width: 410px) {
-  textarea {
-    width: 700px;
-  }
+fieldset {
+    text-align: center;
 }
-.fieldgroup{
-   float: left;
-   width: auto;
-   margin-left: 2em;
+
+div {
+    margin: auto;
 }
-input[type=text] {
-  width: 15em;
-}
+
 label {
-  display: block;
-  color: black;
-  margin: 2em
+    display: inline-block;
+    margin: 10px 20px;
 }
 
-.floatBlock {
-  margin: 0 1.81em 0 0;
+input[type=radio] {
+    display: block;
+    margin: 0 auto;
 }
 
-.labelish {
-	color:black;
-	margin: 0;
-}
-
-.options {
-	border: none;
-	display: flex;
-	flex-direction: row;
-	justify-content: left;
-	break-before: always;
-	margin: 2 2 5em 2;
-}
-
-
-.options li {
-  list-style-type: none;
-  margin-top: 5px;
-}
-
-.error {
-  color: #a40000;
-}
-
-.results {
-  width: 100%;
-  table-layout: fixed;
-}
-
-.results td, .results th{
-  padding: 12px 12px;
-  word-wrap: break-word;
-}
 .form-submit-button {
-    font-size: 180%
-    background: white;
+    font-size: large;
     color: black;
-    border-style: outset;
-    border-color: black;
-    bottom: -1px;
-    right: 10px;
 }
-
-
-.questionnaire-list li {
-  margin: 10px auto;
-}
-
-.questionnaire-list .form {
-}
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.show {display:block;}

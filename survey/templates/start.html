@@ -6,21 +6,25 @@
 <h1>{{ survey_data.title }}</h1>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-Thank you for participating in this questionnaire to further our research! Please answer the questions to the best of your ability. If at any time you wish to not participate, please feel free to close the browser and exit the questionnaire.
+
+Thank for choosing to participate in the study entitled, “Zero-shot Insider Threat Detection through Human-computer Interaction.”  The purpose of the study is to understand key components of insider threat activity based on how participants respond to some security questions. Your participation in this survey is strictly voluntary.
+<br/><br/>
+Your responses to the following survey containing 32 questions will enable us to better understand and predict insider threats.
+<br/><br/>
+The survey is broken up into two parts. In the first part, you will be instructed to answer questions truthfully, or the best of your knowledge.
+<br/><br/>
+In the second part, you will be instructed to impersonate someone you know well, answering questions as if you were that person. Try your hardest to avoid detection as an intruder!
+<br/><br/>
+All of your responses will remain anonymous and confidential. If at any time you wish to discontinue the questionnaire, please exit the browser. Incomplete questionnaires will not be included in research.
+<br/><br/>
+If you have any questions or comments about this study, please contact the Principal Investigator, Dr. Vinnie Monaco, (831) 656-7602, john.monaco@nps.edu.  Questions about your rights as a research subject or any other concerns may be addressed to the Navy Postgraduate School IRB Chair, Dr. Larry Shattuck, 831-656-2473, lgshattu@nps.edu.
+<br/><br/>
+If you wish to start the survey, please click on the button below.
+<br/><br/>
 
 <form method="POST" action="{{ url_for('survey.survey', slug=slug) }}" id="consent_form" autocomplete="off">
   <input id="sessionID" name="sessionID" type="hidden" value="{{ session_id }}">
   <input id="questionID" name="questionID" type="hidden" value="start">
-  <button type="submit" class="btn btn-primary btn-block btn-large" id="submit">Begin</button>
+  <button type="submit" class="form-submit-button" id="submit">Begin</button>
 </form>
 {% endblock content %}
